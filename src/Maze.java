@@ -4,15 +4,13 @@ public class Maze {
     private String[][] maze;
     private int row = 0;
     private int col = 0;
-    private int xPoint = 0;
-    private int yPoint = 0;
 
     public Maze(String[][] maze){
         this.maze = maze;
     }
 
     public boolean inBounds(int row, int col){
-        if(row < 0 || col < 0 || row >= maze.length || col >= maze.length){
+        if(row < 0 || col < 0 || row >= maze.length || col >= maze[0].length){
             return false;
         }
         return true;
@@ -94,7 +92,7 @@ public class Maze {
         int[] movePoints = new int[2];
         //bottom
         if(maze[row + 1][col].equals( ".")){
-            movePoints[0] =  row+1;
+            movePoints[0] =  row + 1;
             movePoints[1] = col;
         }
         return movePoints;
