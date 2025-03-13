@@ -61,41 +61,41 @@ public class Main {
     public static void parTwo(String[][] filedata){
         ArrayList<int[]> visited = new ArrayList<>();
         Maze m = new Maze(filedata);
-
+        int row = filedata.length;
+        int col = filedata[0].length;
         int[] arrPoints = new int[2];
         arrPoints[0] = 0;
         arrPoints[1] = 0;
         int xPosition = 0;
         int yPosition = 0;
         visited.add(arrPoints);
-
         // part Two:
         Deque<int[]> availabePoints = new ArrayDeque<int[]>();
         availabePoints.add(arrPoints);
-        while (!availabePoints.isEmpty()) {
+        while (xPosition < row - 1 || yPosition < col - 1) {
             arrPoints = availabePoints.removeFirst();
             xPosition = arrPoints[0];
             yPosition = arrPoints[1];
             System.out.print("(" + xPosition + "," + yPosition + ")" + "-->");
             // top
             if (m.canMoveTop(xPosition, yPosition) && !(m.containsArray(visited, m.moveTop(xPosition, yPosition)))) {
-                availabePoints.add(m.moveTop(xPosition, yPosition));
-                visited.add(arrPoints);
+                availabePoints.addFirst(m.moveTop(xPosition, yPosition));
+                visited.addFirst(arrPoints);
             }
             //right
             if (m.canMoveRight(xPosition, yPosition) && !(m.containsArray(visited, m.moveRight(xPosition, yPosition)))) {
-                availabePoints.add(m.moveRight(xPosition, yPosition));
-                visited.add(arrPoints);
+                availabePoints.addFirst(m.moveRight(xPosition, yPosition));
+                visited.addFirst(arrPoints);
             }
             // left
             if (m.canMoveLeft(xPosition, yPosition) && !(m.containsArray(visited, m.moveLeft(xPosition, yPosition)))) {
-                availabePoints.add(m.moveLeft(xPosition, yPosition));
-                visited.add(arrPoints);
+                availabePoints.addFirst(m.moveLeft(xPosition, yPosition));
+                visited.addFirst(arrPoints);
             }
             //bottom
             if (m.canMoveBottom(xPosition, yPosition) && !(m.containsArray(visited, m.moveBottom(xPosition, yPosition)))) {
-                availabePoints.add( m.moveBottom(xPosition, yPosition));
-                visited.add(arrPoints);
+                availabePoints.addFirst( m.moveBottom(xPosition, yPosition));
+                visited.addFirst(arrPoints);
             }
 
         }
