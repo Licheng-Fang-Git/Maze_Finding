@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Maze {
     private String[][] maze;
@@ -40,6 +41,9 @@ public class Maze {
             if (maze[row + 1][col].equals(".")) {
                 return true;
             }
+            else{
+                return false;
+            }
         }
         return false;
     }
@@ -56,13 +60,8 @@ public class Maze {
     public int[] moveTop(int row, int col){
         int[] movePoints = new int[2];
         //top
-        if(inBounds(row - 1, col)) {
-            if (maze[row - 1][col].equals(".")) {
-                movePoints[0] = row - 1;
-                movePoints[1] = col;
-            }
-        }
-
+        movePoints[0] = row - 1;
+        movePoints[1] = col;
         return movePoints;
     }
 
@@ -70,10 +69,8 @@ public class Maze {
         int[] movePoints = new int[2];
 
         //right
-        if(maze[row][col + 1].equals(".")){
-            movePoints[0] = row;
-            movePoints[1] = col + 1;
-        }
+        movePoints[0] = row;
+        movePoints[1] = col + 1;
 
         return movePoints;
     }
@@ -81,21 +78,28 @@ public class Maze {
     public int[] moveLeft(int row, int col){
         int[] movePoints = new int[2];
         //left
-        if(maze[row][col - 1].equals(".")){
-            movePoints[0] =  row;
-            movePoints[1] = col-1;
-        }
+        movePoints[0] =  row;
+        movePoints[1] = col-1;
+
         return movePoints;
     }
 
     public int[] moveBottom(int row, int col){
         int[] movePoints = new int[2];
         //bottom
-        if(maze[row + 1][col].equals( ".")){
-            movePoints[0] =  row + 1;
-            movePoints[1] = col;
-        }
+        movePoints[0] =  row + 1;
+        movePoints[1] = col;
+
         return movePoints;
+    }
+
+    public boolean containsArray(ArrayList<int[]> list, int[] array) {
+        for (int[] element : list) {
+            if (Arrays.equals(element, array)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

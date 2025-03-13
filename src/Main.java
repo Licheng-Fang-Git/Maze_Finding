@@ -12,8 +12,8 @@ public class Main {
         String[][] filedata = getMaze("src/input");
         int row = filedata.length;
         int col = filedata[0].length;
-        for(int i = 0; i < row; i++){
-            for (int j = 0; j < col; j++){
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 System.out.print(filedata[i][j] + " ");
             }
             System.out.println();
@@ -30,64 +30,40 @@ public class Main {
         int yPosition = 0;
         visited.add(arrPoints);
 
-        while(arrPoints[0] != row - 1 || arrPoints[1] != col - 1){
+        while (arrPoints[0] < row - 1 || arrPoints[1] < col - 1) {
             xPosition = arrPoints[0];
             yPosition = arrPoints[1];
             System.out.print("(" + xPosition + "," + yPosition + ")" + "-->");
             // top
-            if (m.canMoveTop(xPosition, yPosition)){
-                System.out.println("Top");
-                temp = m.moveTop(xPosition, yPosition);
-                if (visited.contains(temp)) {
-                    continue;
-                }
-                else{
-                    arrPoints = m.moveTop(xPosition, yPosition);
-                    visited.add(arrPoints);
-                }
+            if (m.canMoveTop(xPosition, yPosition) && !(m.containsArray(visited, m.moveTop(xPosition, yPosition)))) {
+                arrPoints = m.moveTop(xPosition, yPosition);
+                visited.add(arrPoints);
             }
-            // left
-            if (m.canMoveLeft(xPosition, yPosition)){
-                System.out.println("Left");
-                temp = m.moveLeft(xPosition, yPosition);
-                if (visited.contains(temp)) {
-                    System.out.println("True");
-                    continue;
-                }
-                else{
-                    arrPoints = m.moveLeft(xPosition, yPosition);
-                    visited.add(arrPoints);
-                }
-            }
+
             //right
-            if (m.canMoveRight(xPosition, yPosition)){
-                System.out.println("Right");
-                temp = m.moveRight(xPosition, yPosition);
-                if (visited.contains(temp)) {
-                    continue;
-                }
-                else{
-                    arrPoints = m.moveRight(xPosition, yPosition);
-                    visited.add(arrPoints);
-                }
+            if (m.canMoveRight(xPosition, yPosition) && !(m.containsArray(visited, m.moveRight(xPosition, yPosition)))) {
+                arrPoints = m.moveRight(xPosition, yPosition);
+                visited.add(arrPoints);
+            }
+
+            // left
+            if (m.canMoveLeft(xPosition, yPosition) && !(m.containsArray(visited, m.moveLeft(xPosition, yPosition)))) {
+                arrPoints = m.moveLeft(xPosition, yPosition);
+                visited.add(arrPoints);
+
             }
 
             //bottom
-            if (m.canMoveBottom(xPosition, yPosition)){
-                System.out.println("Bottom");
-                temp = m.moveBottom(xPosition, yPosition);
-                if (visited.contains(temp)) {
-                    continue;
-                }
-                else{
-                    arrPoints = m.moveBottom(xPosition, yPosition);
-                    visited.add(arrPoints);
-                }
+            if (m.canMoveBottom(xPosition, yPosition) && !(m.containsArray(visited, m.moveBottom(xPosition, yPosition)))) {
+                arrPoints = m.moveBottom(xPosition, yPosition);
+                visited.add(arrPoints);
             }
 
-
         }
+        System.out.println("(" + (row - 1) + "," + (col - 1) + ")");
     }
+
+
 
 
     public static String[][] getMaze(String fileName) {
